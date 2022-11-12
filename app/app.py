@@ -29,10 +29,11 @@ def audio_app():
     """)
     save_audio(path,record_audio()) 
 
-    
     text = audiototext(path)
+    print(text)
     botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
-    texttoaudio(botreply)
+    print(botreply)
+    texttoaudio(PARENT_DIR,botreply)
     audiotovideo(botreply)
     print("In app.py, response from bot:"+botreply)
     

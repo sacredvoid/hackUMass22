@@ -4,7 +4,7 @@ def record_audio():
     print("Initialized sr recognizer")
     with sr.Microphone() as source:
         print("inside microphone")
-        audio = r.listen(source, timeout=4, phrase_time_limit=2)
+        audio = r.listen(source, timeout=10, phrase_time_limit=5)
     
     return audio
     

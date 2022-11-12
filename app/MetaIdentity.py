@@ -1,6 +1,6 @@
 import speech_recognition as sr
 from gtts import gTTS
-#import pyttsx3
+import pyttsx3
 import os
 import requests
 from Secrets import API_TOKEN
@@ -9,7 +9,7 @@ from PIL import Image
 
 GENERATED_ASSETS = './assets/generated'
 UPLOADED_ASSETS = './assets/uploaded'
-#engine = pyttsx3.init()
+engine = pyttsx3.init()
 
 def audiototext(filename):
     r = sr.Recognizer()
@@ -18,14 +18,14 @@ def audiototext(filename):
         text = r.recognize_google(audio_data)
         return text
 
-def texttoaudio(text):
+def texttoaudio(parent_path,text):
     if text!="":
         #language = 'en'
         #myobj = gTTS(text=text, lang=language, slow=False, tld='com.in')
         #myobj.save(GENERATED_ASSETS+"/reply.mp3")
 
         # male voice
-        engine.save_to_file(text, GENERATED_ASSETS+"/reply.mp3")
+        engine.save_to_file(text, os.path.join(parent_path,GENERATED_ASSETS)+"/reply.wav")
         engine.runAndWait()
 
         # read audio and apply style transfer
