@@ -5,7 +5,7 @@ import os
 import requests
 from Secrets import API_TOKEN
 from PIL import Image
-import moviepy.editor as mp
+# import moviepy.editor as mp
 import requests
 
 import requests # request img from web
