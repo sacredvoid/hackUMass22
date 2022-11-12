@@ -5,7 +5,11 @@ import os
 import requests
 from Secrets import API_TOKEN
 from PIL import Image
-#import moviepy.editor as mp
+import moviepy.editor as mp
+import requests
+
+import requests # request img from web
+import shutil # save img locally
 
 GENERATED_ASSETS = './assets/generated'
 UPLOADED_ASSETS = './assets/uploaded'
@@ -72,20 +76,73 @@ def s2t2huggingface(past_user_inputs, max_convo, generated_responses, text):
   
 # Get audio from user
 
-# convert to toon - https://github.com/williamyang1991/VToonify
-def image2toon(image):
-    pass
+# convert to toon
+def image2toon(image, parent_path):
+
+    """
+    r = requests.post(
+        "https://api.deepai.org/api/toonify",
+        files={
+            'image': open(image, 'rb'),
+        },
+        headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+    )
+    print(r.json())
+    """
+
+    """
+    import replicate
+    model = replicate.models.get("minivision-ai/photo2cartoon")
+    version = model.versions.get("39a9e414d9ed06af42f0b98e9b4c96c34b7aa712")
+    output = version.predict(photo=image)
+    
+    """
+
+    #https://rapidapi.com/sensorai-sensorai-default/api/3d-cartoon-face/
+    url = "https://3d-cartoon-face.p.rapidapi.com/run"
+
+    gcplink = "https://jixjiastorage.blob.core.windows.net/public/sensor-ai/3d_cartoon_face/1.jpg"
+
+    payload = {
+        "image": gcplink,
+        "render_mode": "3d",
+        "output_mode": "url"
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "007e1eee8dmshe8856ed6b250f8fp123656jsn93ffb4c92092",
+        "X-RapidAPI-Host": "3d-cartoon-face.p.rapidapi.com"
+    }
+
+    response = requests.request("POST", url, json=payload, headers=headers)
+    print(response.text)
+
+    url = response.json()["output_url"]
+    file_name = os.path.join(parent_path,GENERATED_ASSETS) +"/toonimage.jpg"
+    res = requests.get(url, stream = True)
+
+    if res.status_code == 200:
+        with open(file_name,'wb') as f:
+            shutil.copyfileobj(res.raw, f)
+        print('Image sucessfully Downloaded: ',file_name)
+    else:
+        print('Image Couldn\'t be retrieved')
+    
+    
+    
+    
+    
 
 # toon + audio to video synthezier (Takes input image) - https://github.com/tg-bomze/Face-Image-Motion-Model
-def audiotovideo(text):
+def audiotovideo(text, parent_path):
     if text!="":
         #open audio
-        audio = mp.AudioFileClip(GENERATED_ASSETS + "/reply.wav")
+        audio = mp.AudioFileClip(os.path.join(parent_path,GENERATED_ASSETS) + "/reply.wav")
         #open video
-        video1 = mp.VideoFileClip("./assets/video1.mp4")
+        video1 = mp.VideoFileClip(os.path.join(parent_path,UPLOADED_ASSETS)+"./video1.mp4")
         #merge 
         final = video1.set_audio(audio)
-        final.write_videofile("output.mp4",codec= 'mpeg4' ,audio_codec='libvorbis')
+        final.write_videofile(os.path.join(parent_path,GENERATED_ASSETS) +"output.mp4",codec= 'mpeg4' ,audio_codec='libvorbis')
 
 
 def imageonvideo(image,video):

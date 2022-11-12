@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 import streamlit.components.v1 as components
-from MetaIdentity import s2t2huggingface, GENERATED_ASSETS, UPLOADED_ASSETS, texttoaudio, audiotovideo, audiototext
+from MetaIdentity import s2t2huggingface, GENERATED_ASSETS, UPLOADED_ASSETS, texttoaudio, audiotovideo, audiototext, image2toon
 import time
 import streamlit as st
 from audiorecorder import audiorecorder
@@ -34,7 +34,8 @@ def audio_app():
     botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
     print(botreply)
     texttoaudio(PARENT_DIR,botreply)
-    audiotovideo(botreply)
+    audiotovideo(botreply, PARENT_DIR)
+    image2toon(os.path.join(PARENT_DIR,"assets/uploaded/c.jpg"), PARENT_DIR)
     print("In app.py, response from bot:"+botreply)
     
     #st_audiorec()
