@@ -6,6 +6,8 @@ import time
 import streamlit as st
 from audiorecorder import audiorecorder
 from sr_audio_recorder import record_audio, save_audio
+from gcp_helpers import upload_blob, download_blob
+
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # def file_writer(file_like_object):
@@ -36,24 +38,8 @@ def audio_app():
     texttoaudio(PARENT_DIR,botreply)
     audiotovideo(botreply, PARENT_DIR)
     image2toon(os.path.join(PARENT_DIR,"assets/uploaded/c.jpg"), PARENT_DIR)
+
     print("In app.py, response from bot:"+botreply)
-    
-    #st_audiorec()
-    uploaded_file = st.file_uploader("Choose a file")
-    if(uploaded_file is not None):
-        # Call the s2t2huggingface here
-        write_audio_file(path,uploaded_file)
-
-        text = audiototext(path)
-        botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
-        texttoaudio(botreply)
-        audiotovideo(botreply)
-        print("In app.py, response from bot:"+botreply)
-
-
-
-    
-    
 
 def main():
     # build_dir = os.path.join(PARENT_DIR, "st_audiorec/frontend/build")

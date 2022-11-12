@@ -1,1 +1,3 @@
 Secrets.py
+*.json
+*__pycache__*
