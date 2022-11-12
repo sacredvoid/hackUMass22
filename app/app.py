@@ -21,33 +21,30 @@ def audio_app(col2):
     with col2:
         # Call button to call sr.listen()
         path = os.path.join(PARENT_DIR,"assets/uploaded/sr_input_audio.wav")
-        st.button("Click to record...",help="Click to start recording your voice! It only records max of upto 10 seconds",on_click=save_audio(path,record_audio()))
+        clicked = st.button("Click me 👈...",help="Click to start recording your voice! It only records max of upto 10 seconds",on_click=save_audio(path,record_audio()))
         # audio = audiorecorder("Click to record", "Recording...")
         # path = "input2_audio.mp3"
-        st.write("""
-        ### Audio file saved I guess...
-        """)
-        # save_audio(path,record_audio()) 
+        if clicked:
+            # save_audio(path,record_audio()) 
 
-        text = audiototext(path)
-        st.write("""
-        ### Audio  
-        """)
-        print(text)
-        botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
-        print(botreply)
-        texttoaudio(PARENT_DIR,botreply)
-        # audiotovideo(botreply, PARENT_DIR)
-        # image2toon(os.path.join(PARENT_DIR,"assets/uploaded/c.jpg"), PARENT_DIR)
+            text = audiototext(path)
+            st.write(f'😎 {text}')
+            print(text)
+            botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
+            st.write(f'🤖 {botreply}')
+            print(botreply)
+            texttoaudio(PARENT_DIR,botreply)    
+            # audiotovideo(botreply, PARENT_DIR)
+            # image2toon(os.path.join(PARENT_DIR,"assets/uploaded/c.jpg"), PARENT_DIR)
 
-        print("In app.py, response from bot:"+botreply)
+            print("In app.py, response from bot:"+botreply)
 
 def ui():
     st.write("""
         # RIP
         Create your identity on the Metaverse now!!!
         """)
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([10, 10, 10])
     with col1:
         st.header("Your image goes here")
 
