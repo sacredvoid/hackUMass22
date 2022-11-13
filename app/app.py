@@ -60,8 +60,10 @@ def audio_app(col2):
             
             # convert reply to audio -- voice cloning 
             try:    
-                texttoaudio(PARENT_DIR,botreply, st.session_state.animate_image_file)
+                texttoaudio(PARENT_DIR, botreply, st.session_state.animate_image_file)
+                print("correct entered")
             except:
+                print("simple entered")
                 st.error("Could not clone your voice!") 
                 st.session_state['chatbot_status'] = "failed" 
                 st.stop

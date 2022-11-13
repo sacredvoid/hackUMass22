@@ -28,17 +28,22 @@ def texttoaudio(parent_path,text, image_name):
         #myobj = gTTS(text=text, lang=language, slow=False, tld='com.in')
         #myobj.save(GENERATED_ASSETS+"/reply.mp3")
 
+        
         # femail voice
         if image_name == "HappyWoman":
+            print("---------", image_name)
             engine = pyttsx3.init('sapi5')
             voices = engine.getProperty('voices')
             engine.setProperty('rate', 196)
             engine.setProperty('volume', 2.7)
             engine.setProperty('voice', voices[1].id)
-        # male voice
-        engine.save_to_file(text, os.path.join(parent_path,GENERATED_ASSETS)+"/reply.wav")
+        
+        else:
+            # male voice
+            engine = pyttsx3.init()
+            engine.save_to_file(text, os.path.join(parent_path,GENERATED_ASSETS)+"/reply.wav")
+            
         engine.runAndWait()
-
         # read audio and apply style transfer
 
 def chatbot(textinput,  past_user_inputs, generated_responses):
