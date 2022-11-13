@@ -41,7 +41,8 @@ def texttoaudio(parent_path,text, image_name):
         else:
             # male voice
             engine = pyttsx3.init()
-            engine.save_to_file(text, os.path.join(parent_path,GENERATED_ASSETS)+"/reply.wav")
+        
+        engine.save_to_file(text, os.path.join(parent_path,GENERATED_ASSETS)+"/reply.wav")
             
         engine.runAndWait()
         # read audio and apply style transfer

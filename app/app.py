@@ -139,13 +139,13 @@ def ui():
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
-        st.header("Your image goes here")
+        st.header("Your 📸 image goes here")
 
     with col2:
-        st.header("Your audio goes here")
+        st.header("Your 🎤 audio goes here")
     
     with col3:
-        st.header("Your 📜chats go here")
+        st.header("Your 📜 chats go here")
     
     return col1,col2,col3
 
@@ -190,8 +190,8 @@ def main():
                     """)
                     col1, col2, col3 , _ = st.columns([1,1,1,1])
                     with col1:
-                        image = Image.open(os.path.join(PARENT_DIR,"assets/uploaded/toonimage_woman.jpg"))
-                        st.image(image, caption="Your Input image")
+                        # image = Image.open(img_selected(st.session_state.animate_image_file))
+                        st.image(target_img_gcp_uri, caption="Your Input image")
                     with col2:
                         image = Image.open(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"))
                         st.image(image, caption="Your \"Toonified\" image")
