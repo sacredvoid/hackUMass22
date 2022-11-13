@@ -184,7 +184,7 @@ def main():
                 with st.container(): 
                     st.write("""
                     # Demo
-                    ## This is how your your digital avatar would look and talk like!
+                    ## This is how your digital avatar would look and talk like!
                     """)
                     col1, col2, col3 , _ = st.columns([1,1,1,1])
                     with col1:
