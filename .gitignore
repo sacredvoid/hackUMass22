@@ -1,3 +1,8 @@
 Secrets.py
 *.json
 *__pycache__*
+*.dat
+*.wav
+*.mp4
+*.jpeg
+*.jpg

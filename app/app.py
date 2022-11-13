@@ -1,4 +1,5 @@
 import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 import streamlit as st
 import streamlit.components.v1 as components
 from MetaIdentity import s2t2huggingface, GENERATED_ASSETS, UPLOADED_ASSETS, texttoaudio, audiotovideo, audiototext, image2toon
@@ -7,6 +8,7 @@ import streamlit as st
 from audiorecorder import audiorecorder
 from sr_audio_recorder import record_audio, save_audio
 from gcp_helpers import upload_blob, download_blob
+from faceanimator import sda
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -15,6 +17,7 @@ PAST_USER_INPUTS = []
 MAX_CONVO_WINDOW = 5
 GENERATED_RESPONSE = []
 DURATION = 5
+video_animator = sda.sda.VideoAnimator(gpu=-1, model_path="crema")# Instantiate the animator
 
 
 def audio_app(col2):
@@ -25,19 +28,36 @@ def audio_app(col2):
         # audio = audiorecorder("Click to record", "Recording...")
         # path = "input2_audio.mp3"
         if clicked:
+            print("Saving audio file..")
             # save_audio(path,record_audio()) 
 
+            # ------------------
+            gcp_img = os.path.join(PARENT_DIR,"assets/uploaded/c.jpg") # update this with gcp link
+            # ------------------
+            print("Saving image file..")
+
+            # convert audio to text
             text = audiototext(path)
             st.write(f'😎 {text}')
-            print(text)
-            botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
-            st.write(f'🤖 {botreply}')
-            print(botreply)
-            texttoaudio(PARENT_DIR,botreply)    
-            # audiotovideo(botreply, PARENT_DIR)
-            # image2toon(os.path.join(PARENT_DIR,"assets/uploaded/c.jpg"), PARENT_DIR)
+            print("Text from user: ", text)
 
+            # generate reply for text
+            botreply = s2t2huggingface(PAST_USER_INPUTS, MAX_CONVO_WINDOW, GENERATED_RESPONSE, text)
             print("In app.py, response from bot:"+botreply)
+            st.write(f'🤖 {botreply}')
+            
+            # convert reply to audio -- voice cloning 
+            texttoaudio(PARENT_DIR,botreply)    
+            print("Converting reply to audio")
+
+            # convert image to toon
+            image2toon(gcp_img, PARENT_DIR)
+            print("Generating Digital clone...")
+
+            # toon image + audio == generate talking face\
+            print("Saving clone...")
+            audiotovideo(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"),os.path.join(PARENT_DIR,"assets/generated/reply.wav"), PARENT_DIR, video_animator)
+            print("Done...")
 
 def ui():
     st.write("""

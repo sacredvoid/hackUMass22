@@ -130,11 +130,12 @@ def image2toon(image, parent_path):
     
     
     
+# toon image + audio
+def audiotovideo(image, audio, parent_path, va):
+    vid, aud = va(image, audio)
+    va.save_video(vid, aud, os.path.join(parent_path,GENERATED_ASSETS) +"/output.mp4")
     
-    
-
-# toon + audio to video synthezier (Takes input image) - https://github.com/tg-bomze/Face-Image-Motion-Model
-def audiotovideo(text, parent_path):
+    """
     if text!="":
         #open audio
         audio = mp.AudioFileClip(os.path.join(parent_path,GENERATED_ASSETS) + "/reply.wav")
@@ -143,8 +144,5 @@ def audiotovideo(text, parent_path):
         #merge 
         final = video1.set_audio(audio)
         final.write_videofile(os.path.join(parent_path,GENERATED_ASSETS) +"output.mp4",codec= 'mpeg4' ,audio_codec='libvorbis')
-
-
-def imageonvideo(image,video):
-    pass
+    """
 
