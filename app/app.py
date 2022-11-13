@@ -60,7 +60,7 @@ def audio_app(col2):
             
             # convert reply to audio -- voice cloning 
             try:    
-                texttoaudio(PARENT_DIR,botreply)
+                texttoaudio(PARENT_DIR,botreply, st.session_state.animate_image_file)
             except:
                 st.error("Could not clone your voice!") 
                 st.session_state['chatbot_status'] = "failed" 
@@ -74,7 +74,7 @@ def img_selected(option):
     
     if option is "Samanvya": img_name = "1.jpg"
     elif option is "Rajat": img_name = "2.jpg"
-    elif option is "DisneyCharacter": img_name = "toonimage_woman.jpg"
+    elif option is "HappyWoman": img_name = "toonimage_woman.jpg"
     elif option is "GrumpyMan": img_name = "grumpy_man.bmp"
     else:
         img_name = ""
@@ -106,7 +106,7 @@ def video(col1):
     with col1:
         option = st.selectbox(
                 'Who would you like to see animated?',
-                ('Samanvya', 'Rajat', 'DisneyCharacter','GrumpyMan'))
+                ('Samanvya', 'Rajat', 'HappyWoman','GrumpyMan'))
 
         st.write('You selected:', option)
         st.session_state['animate_image_file'] = option
@@ -119,12 +119,11 @@ def ui():
     with coltitle:
         st.write("""
             # *Meta-Identity*
-            ## One stop shop for all your Avatar needs
-            Create your identity on the Metaverse now!!!
+            ## Create Your Presence in Another Reality Now!!!
             """)
 
-    with colimage:
-        st.image(Image.open("Meta-Identity.png"), use_column_width="auto")
+    #with colimage:
+    #    st.image(Image.open("Meta-Identity.png"), use_column_width="auto")
     
     with coldesc:
         st.write("""
@@ -185,7 +184,7 @@ def main():
                 with st.container(): 
                     st.write("""
                     # Demo
-                    ## Here's a glimpse of what your avatar would look and talk like!
+                    ## This is how your your digital avatar would look and talk like!
                     """)
                     _, col1, col3 , _ = st.columns([1,1,1,1])
                     with col1:
