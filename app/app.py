@@ -22,8 +22,14 @@ def audio_app(col2):
         # Call button to call sr.listen()
         path = os.path.join(PARENT_DIR,"assets/uploaded/sr_input_audio.wav")
         st.session_state['chatbot_status'] = "failed"
-        clicked = st.button("Click me 👈...",help="Click to start recording your voice and talking to your bot! It only records max of upto 10 seconds",
+        clicked = False
+        st.write("Talk to a version of yourself here!")
+        try:
+            clicked = st.button("Click me 👈...",help="Click to start recording your voice and talking to your bot! It only records max of upto 10 seconds",
                             on_click=save_audio(path,record_audio()))
+        except:
+            st.error("Unable to record at this time!")
+            st.stop
         if clicked:
             print("Saving audio file..")
             text = ""
@@ -86,13 +92,13 @@ def img_selected(option):
 def chat_train(col3):
     with col3:
         option = st.radio(
-                'Would you like to train the ChatBot on your own data???',
+                'Would you like to *train* the ChatBot on your own data???',
                 ('Yes','No'))
 
         st.write('You selected:', option)
         if(option == "Yes"): 
             st.session_state['train_chatbot'] = "true"
-            st.file_uploader(label="Chat Data")
+            st.file_uploader(label="Upload your chat data here!")
         else: 
             st.session_state['train_chatbot'] = "false"
 
@@ -104,15 +110,29 @@ def video(col1):
 
         st.write('You selected:', option)
         st.session_state['animate_image_file'] = option
+        st.file_uploader("Upload a (well-lit) photo of your face here!")
         print()
         
 
 def ui():
-    st.write("""
-        # Meta-Identity
-        ## One stop shop for all your Avatar needs
-        Create your identity on the Metaverse now!!!
+    coltitle, colimage, coldesc = st.columns([1,1,1])
+    with coltitle:
+        st.write("""
+            # *Meta-Identity*
+            ## One stop shop for all your Avatar needs
+            Create your identity on the Metaverse now!!!
+            """)
+
+    with colimage:
+        st.image(Image.open("Meta-Identity.png"), use_column_width="auto")
+    
+    with coldesc:
+        st.write("""
+        ## About us
+        We are a privacy-first Metaverse solutions company that can make you a digital avatar, a version of 
+        yourself that will be compatible with any Metaverse!
         """)
+
     col1, col2, col3 = st.columns([10, 10, 10])
     with col1:
         st.header("Your image goes here")
@@ -157,11 +177,14 @@ def main():
                     st.error("Failed to generate tooni-fied video!")
                     st.stop
                 print("Done...")
-                with st.container():        
+                with st.container(): 
+                    st.write("""
+                    Here's a glimpse of what your avatar would look and talk like!
+                    """)
                     col1, col2, col3 = st.columns([15,40,15])
                     with col1:
                         image = Image.open(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"))
-                        st.image(image, caption="Your \"Toonified\" image", width=500)
+                        st.image(image, caption="Your \"Toonified\" image")
                     with col3:
                         st.video(os.path.join(PARENT_DIR,"assets/generated/output.mp4"))
 
