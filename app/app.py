@@ -9,6 +9,7 @@ import streamlit as st
 from sr_audio_recorder import record_audio, save_audio
 from gcp_helpers import upload_blob
 from faceanimator import sda
+from PIL import Image
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,8 +90,11 @@ def chat_train(col3):
                 ('Yes','No'))
 
         st.write('You selected:', option)
-        if(option == "Yes"): st.session_state['train_chatbot'] = "true"
-        else: st.session_state['train_chatbot'] = "false"
+        if(option == "Yes"): 
+            st.session_state['train_chatbot'] = "true"
+            st.file_uploader(label="Chat Data")
+        else: 
+            st.session_state['train_chatbot'] = "false"
 
 def video(col1):
     with col1:
@@ -105,7 +109,7 @@ def video(col1):
 
 def ui():
     st.write("""
-        # MetaIdentity
+        # Meta-Identity
         ## One stop shop for all your Avatar needs
         Create your identity on the Metaverse now!!!
         """)
@@ -154,11 +158,11 @@ def main():
                     st.stop
                 print("Done...")
                 with st.container():        
-                    col1, col2 = st.columns([15,15])
+                    col1, col2, col3 = st.columns([15,40,15])
                     with col1:
-                        st.image(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"),
-                                caption="Your \"Toonified\" image")
-                    with col2:
+                        image = Image.open(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"))
+                        st.image(image, caption="Your \"Toonified\" image", width=500)
+                    with col3:
                         st.video(os.path.join(PARENT_DIR,"assets/generated/output.mp4"))
 
 
