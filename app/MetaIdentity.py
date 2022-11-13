@@ -3,7 +3,7 @@ from gtts import gTTS
 import pyttsx3
 import os
 import requests
-from Secrets import API_TOKEN
+from Secrets import API_TOKEN, TOON_KEY
 from PIL import Image
 # import moviepy.editor as mp
 import requests
@@ -78,26 +78,6 @@ def s2t2huggingface(past_user_inputs, max_convo, generated_responses, text):
 
 # convert to toon
 def image2toon(image, parent_path):
-
-    """
-    r = requests.post(
-        "https://api.deepai.org/api/toonify",
-        files={
-            'image': open(image, 'rb'),
-        },
-        headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
-    )
-    print(r.json())
-    """
-
-    """
-    import replicate
-    model = replicate.models.get("minivision-ai/photo2cartoon")
-    version = model.versions.get("39a9e414d9ed06af42f0b98e9b4c96c34b7aa712")
-    output = version.predict(photo=image)
-    
-    """
-
     #https://rapidapi.com/sensorai-sensorai-default/api/3d-cartoon-face/
     url = "https://3d-cartoon-face.p.rapidapi.com/run"
 
@@ -110,7 +90,7 @@ def image2toon(image, parent_path):
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "007e1eee8dmshe8856ed6b250f8fp123656jsn93ffb4c92092",
+        "X-RapidAPI-Key": TOON_KEY,
         "X-RapidAPI-Host": "3d-cartoon-face.p.rapidapi.com"
     }
 
