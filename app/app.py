@@ -186,8 +186,11 @@ def main():
                     # Demo
                     ## This is how your your digital avatar would look and talk like!
                     """)
-                    _, col1, col3 , _ = st.columns([1,1,1,1])
+                    col1, col2, col3 , _ = st.columns([1,1,1,1])
                     with col1:
+                        image = Image.open(os.path.join(PARENT_DIR,"assets/uploaded/toonimage_woman.jpg"))
+                        st.image(image, caption="Your Input image")
+                    with col2:
                         image = Image.open(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"))
                         st.image(image, caption="Your \"Toonified\" image")
                     with col3:
