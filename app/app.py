@@ -122,8 +122,8 @@ def ui():
             ## Create Your Presence in Another Reality Now!!!
             """)
 
-    #with colimage:
-    #    st.image(Image.open("Meta-Identity.png"), use_column_width="auto")
+    with colimage:
+        st.image(Image.open("Meta-Identity.png"), use_column_width="auto")
     
     with coldesc:
         st.write("""
