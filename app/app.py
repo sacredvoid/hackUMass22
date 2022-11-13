@@ -98,7 +98,7 @@ def chat_train(col3):
         st.write('You selected:', option)
         if(option == "Yes"): 
             st.session_state['train_chatbot'] = "true"
-            st.file_uploader(label="Upload your chat data here!")
+            st.file_uploader(label="Upload your 📜 chat data here!")
         else: 
             st.session_state['train_chatbot'] = "false"
 
@@ -110,7 +110,7 @@ def video(col1):
 
         st.write('You selected:', option)
         st.session_state['animate_image_file'] = option
-        st.file_uploader("Upload a (well-lit) photo of your face here!")
+        st.file_uploader("Upload a (well-lit) 📷 photo of your face here!")
         print()
         
 
@@ -132,8 +132,11 @@ def ui():
         We are a privacy-first Metaverse solutions company that can make you a digital avatar, a version of 
         yourself that will be compatible with any Metaverse!
         """)
+    
+    
+    st.markdown("""---""")
 
-    col1, col2, col3 = st.columns([10, 10, 10])
+    col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         st.header("Your image goes here")
 
@@ -141,7 +144,7 @@ def ui():
         st.header("Your audio goes here")
     
     with col3:
-        st.header("Your chats go here")
+        st.header("Your 📜chats go here")
     
     return col1,col2,col3
 
@@ -177,11 +180,14 @@ def main():
                     st.error("Failed to generate tooni-fied video!")
                     st.stop
                 print("Done...")
+                
+                st.markdown("""---""")
                 with st.container(): 
                     st.write("""
-                    Here's a glimpse of what your avatar would look and talk like!
+                    # Demo
+                    ## Here's a glimpse of what your avatar would look and talk like!
                     """)
-                    col1, col2, col3 = st.columns([15,40,15])
+                    _, col1, col3 , _ = st.columns([1,1,1,1])
                     with col1:
                         image = Image.open(os.path.join(PARENT_DIR,"assets/generated/toonimage.jpg"))
                         st.image(image, caption="Your \"Toonified\" image")

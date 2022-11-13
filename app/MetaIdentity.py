@@ -36,7 +36,8 @@ def texttoaudio(parent_path,text):
 
 def chatbot(textinput,  past_user_inputs, generated_responses):
 
-    API_URL = "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    # API_URL = "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    API_URL = "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large"
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
     def query(payload):
