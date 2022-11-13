@@ -3,7 +3,7 @@ import os
 from Secrets import GCP_CREDENTIALS, STORAGE_LINK_HEADER
 
 def init_client():
-    storage_client = storage.Client.from_service_account_json(os.path.join(os.path.dirname(os.path.abspath(__file__)),GCP_CREDENTIALS)+".json")
+    storage_client = storage.Client.from_service_account_json(os.path.join(os.path.dirname(os.path.abspath(__file__)),GCP_CREDENTIALS))
     return storage_client
 
 def upload_blob(bucket_name, source_file_name):
@@ -24,6 +24,7 @@ def upload_blob(bucket_name, source_file_name):
     print(
         f"File {source_file_name} uploaded to {destination_blob_name}."
     )
+    return construct_storage_link(bucket_name,destination_blob_name)
 
 def download_blob(bucket_name, source_blob_name, destination_path):
     """Downloads a blob from the bucket."""

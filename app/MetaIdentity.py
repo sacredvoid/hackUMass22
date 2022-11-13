@@ -16,10 +16,10 @@ UPLOADED_ASSETS = './assets/uploaded'
 engine = pyttsx3.init()
 
 def audiototext(filename):
-    r = sr.Recognizer()
+    recognizer = sr.Recognizer()
     with sr.AudioFile(filename) as source:
-        audio_data = r.record(source)
-        text = r.recognize_google(audio_data)
+        audio_data = recognizer.record(source)
+        text = recognizer.recognize_google(audio_data)
         return text
 
 def texttoaudio(parent_path,text):
@@ -77,11 +77,11 @@ def s2t2huggingface(past_user_inputs, max_convo, generated_responses, text):
 # Get audio from user
 
 # convert to toon
-def image2toon(image, parent_path):
+def image2toon(gcplink, parent_path):
     #https://rapidapi.com/sensorai-sensorai-default/api/3d-cartoon-face/
     url = "https://3d-cartoon-face.p.rapidapi.com/run"
 
-    gcplink = "https://jixjiastorage.blob.core.windows.net/public/sensor-ai/3d_cartoon_face/1.jpg"
+    # gcplink = "https://jixjiastorage.blob.core.windows.net/public/sensor-ai/3d_cartoon_face/1.jpg"
 
     payload = {
         "image": gcplink,

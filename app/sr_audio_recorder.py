@@ -1,6 +1,7 @@
 from gcp_helpers import download_blob, upload_blob
 from Secrets import GCP_BUCKET_NAME
 import speech_recognition as sr
+
 def record_audio():
     r = sr.Recognizer()
     print("Initialized sr recognizer")
