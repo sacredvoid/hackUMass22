@@ -1,0 +1,9 @@
+numpy
+scipy
+scikit-video
+scikit-image
+ffmpeg-python
+torch
+face-alignment
+torchvision
+pydub
