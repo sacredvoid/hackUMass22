@@ -1,6 +1,7 @@
 # Meta-Identity
 ![Meta-Identity](https://user-images.githubusercontent.com/33939902/201859267-ff740ab5-2c66-42b6-b0b5-43d4fe53b98e.png)
-**This is our winning submission for HackUMass '22, where we were named the 'Best AI/ML Hack'.**
+**This is our winning submission for HackUMass '22, where we were named the 'Best AI/ML Hack'.**\\
+#### Find us on [Devpost](https://devpost.com/software/meta-identity-0t94fp)
 
 ## Inspiration
 In the world today, the number of people using the internet and social media, and creating a digital presence, has been increasing day by day. At this rate, the internet can be treated as another universe itself. This led to our inspiration of creating Meta-Identity, which directly translates to one personifying his or her own real personality into a digital clone. Meta-Identity facilitates and provides a way to create your presence in the metaverse and digital sphere, by actually truly being in it, while not being it in at the same time.
@@ -22,9 +23,6 @@ We learnt how to built scalable software solutions in the field of ML with multi
 
 ## What's next for Meta-Identity
 The next step for this project would be to move it into the AR/VR shere. Currently our digital clone is restricted to a 2D image. The next step would be to bring the 2D clone into a 3D space and into AR/VR technologies.
-
-## Devpost
-https://devpost.com/submit-to/16758-hackumass-x/manage/submissions/370074-meta-identity/finalization
 
 ## Run Locally
 1) pip install -r requirements
